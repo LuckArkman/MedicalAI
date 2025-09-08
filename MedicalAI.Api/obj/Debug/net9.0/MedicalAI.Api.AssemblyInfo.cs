@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedicalAI.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd5b760a09f6bb5e4b74d71e55d141fed338c7da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eaf7560ae97785beeefd90d3de15e933d3965a2b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedicalAI.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedicalAI.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

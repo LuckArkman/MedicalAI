@@ -26,7 +26,14 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/MedicalAI.Application.csproj": {
+                "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/MedicalAI.Application.csproj"
+              },
+              "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj": {
+                "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -45,9 +52,17 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[13.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.5, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -65,6 +80,221 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/MedicalAI.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/MedicalAI.Application.csproj",
+        "projectName": "MedicalAI.Application",
+        "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/MedicalAI.Application.csproj",
+        "packagesPath": "/home/mplopes/.nuget/packages/",
+        "outputPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mplopes/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj": {
+                "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj"
+              },
+              "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj": {
+                "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[13.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj",
+        "projectName": "MedicalAI.Domain",
+        "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj",
+        "packagesPath": "/home/mplopes/.nuget/packages/",
+        "outputPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mplopes/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj",
+        "projectName": "MedicalAI.Infrastructure",
+        "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/MedicalAI.Infrastructure.csproj",
+        "packagesPath": "/home/mplopes/.nuget/packages/",
+        "outputPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mplopes/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj": {
+                "projectPath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Domain/MedicalAI.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[13.0.0, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
