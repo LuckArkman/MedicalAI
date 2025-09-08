@@ -1,20 +1,54 @@
 using System.Text;
 using System.Text.Json;
+using MedicalAI.Infrastructure.Interfaces; // Verifique seu namespace
 using MedicalAI.Domain.Entities;
-using MedicalAI.Infrastructure.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace MedicalAI.Infrastructure.Services;
+
+// Classe auxiliar para desserializar o arquivo JSON
+file class PromptFile
+{
+    public string Template { get; set; } = string.Empty;
+}
 
 public class GeminiService : IGeminiService
 {
     private readonly HttpClient _httpClient;
     private readonly GeminiSettings _settings;
+    private readonly string _promptTemplate; // Campo para armazenar o template do prompt
 
     public GeminiService(HttpClient httpClient, IOptions<GeminiSettings> settings)
     {
         _httpClient = httpClient;
         _settings = settings.Value;
+
+        // Carrega o prompt do arquivo JSON uma vez, durante a inicialização do serviço.
+        _promptTemplate = LoadPromptTemplate();
+    }
+
+    private string LoadPromptTemplate()
+    {
+        try
+        {
+            // Constrói o caminho para o arquivo de forma robusta
+            var promptFilePath = Path.Combine(AppContext.BaseDirectory, "Prompts", "prompt.json");
+            var jsonContent = File.ReadAllText(promptFilePath);
+            var promptFile = JsonSerializer.Deserialize<PromptFile>(jsonContent);
+
+            if (string.IsNullOrWhiteSpace(promptFile?.Template))
+            {
+                throw new InvalidOperationException("O template do prompt está vazio ou não foi encontrado no arquivo prompt.json.");
+            }
+            
+            return promptFile.Template;
+        }
+        catch (Exception ex)
+        {
+            // Logar o erro em um sistema de log real é fundamental aqui
+            Console.WriteLine($"Erro crítico ao carregar o prompt.json: {ex.Message}");
+            throw; // Relança a exceção para impedir que a aplicação inicie com uma configuração inválida.
+        }
     }
 
     public async Task<AnaliseResultado> GerarAnaliseMedicaAsync(string dadosExame, string contextoAdicional, CancellationToken cancellationToken)
@@ -23,7 +57,6 @@ public class GeminiService : IGeminiService
         
         var requestUrl = $"{_settings.ApiEndpoint}?key={_settings.ApiKey}";
 
-        // Estrutura do corpo da requisição para a API do Gemini
         var requestBody = new
         {
             contents = new[]
@@ -32,7 +65,6 @@ public class GeminiService : IGeminiService
             },
             generationConfig = new 
             {
-                // Configurações para forçar a saída em JSON
                 response_mime_type = "application/json", 
             }
         };
@@ -43,43 +75,18 @@ public class GeminiService : IGeminiService
         response.EnsureSuccessStatusCode();
 
         var jsonResponse = await response.Content.ReadAsStringAsync(cancellationToken);
-
-        // Extrair e desserializar a resposta JSON do Gemini
         var analise = ExtrairEConverterResultado(jsonResponse);
 
         return analise;
     }
 
+    // O método agora é muito mais simples e limpo!
     private string ConstruirPrompt(string dadosExame, string contextoAdicional)
     {
-        return $"""
-                Você é um assistente de IA especializado em análise de dados médicos, treinado para auxiliar profissionais de saúde.
-                Sua tarefa é analisar os dados de um exame médico, com base estritamente no CONTEXTO DE REFERÊNCIA fornecido.
-                Você NÃO DEVE usar conhecimento externo ao que foi fornecido.
-
-                {contextoAdicional}
-
-                --- INÍCIO DOS DADOS DO EXAME ---
-                {dadosExame}
-                --- FIM DOS DADOS DO EXAME ---
-
-                Com base nos DADOS DO EXAME e utilizando APENAS o CONTEXTO DE REFERÊNCIA, forneça uma análise.
-                
-                Siga o seguinte formato JSON OBRIGATORIAMENTE:
-                {{
-                  "resumoAnalise": "Um resumo conciso da sua análise com base nos dados e no contexto.",
-                  "sugestoesTratamento":
-                  [
-                    "Sugestão 1 baseada no protocolo X.",
-                    "Sugestão 2 baseada no artigo Y."
-                  ],
-                  "fontesReferenciadas":
-                  [
-                    "Protocolo SUS para Tratamento de Diabetes Tipo 2",
-                    "Artigo PubMed (PMID: 12345678)"
-                  ]
-                }}
-                """;
+        // Substitui os placeholders no template carregado do arquivo.
+        return _promptTemplate
+            .Replace("{{ContextoAdicional}}", contextoAdicional)
+            .Replace("{{DadosExame}}", dadosExame);
     }
 
     private AnaliseResultado ExtrairEConverterResultado(string jsonResponse)
@@ -87,7 +94,6 @@ public class GeminiService : IGeminiService
         try
         {
             using var doc = JsonDocument.Parse(jsonResponse);
-            // Navega na estrutura de resposta do Gemini para encontrar o texto
             var text = doc.RootElement
                           .GetProperty("candidates")[0]
                           .GetProperty("content")
@@ -100,7 +106,6 @@ public class GeminiService : IGeminiService
                 throw new InvalidOperationException("A resposta da API do Gemini não contém texto.");
             }
             
-            // O texto retornado já é o JSON que pedimos
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var resultado = JsonSerializer.Deserialize<AnaliseResultado>(text, options);
 
@@ -108,7 +113,6 @@ public class GeminiService : IGeminiService
         }
         catch (Exception ex)
         {
-            // Logar o erro e o jsonResponse para depuração
             Console.WriteLine($"Erro ao processar JSON da IA: {ex.Message}");
             return new AnaliseResultado { ResumoAnalise = "Formato de resposta inválido recebido da IA." };
         }

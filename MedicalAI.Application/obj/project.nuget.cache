@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "PKVUnHu7B7I=",
+  "dgSpecHash": "avU/mEGcb9A=",
   "success": true,
   "projectFilePath": "/home/mplopes/Documentos/GitHub/MedicalAI/MedicalAI.Application/MedicalAI.Application.csproj",
   "expectedPackageFiles": [
+    "/home/mplopes/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
+    "/home/mplopes/.nuget/packages/fluentvalidation.aspnetcore/11.3.1/fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
+    "/home/mplopes/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.11.0/fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
     "/home/mplopes/.nuget/packages/mediatr/13.0.0/mediatr.13.0.0.nupkg.sha512",
     "/home/mplopes/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/home/mplopes/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

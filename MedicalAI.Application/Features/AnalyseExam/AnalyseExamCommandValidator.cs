@@ -1,3 +1,5 @@
+using FluentValidation;
+
 namespace MedicalAI.Application.Features.AnalyseExam;
 
 public class AnalyseExamCommandValidator : AbstractValidator<AnalyseExamCommand>

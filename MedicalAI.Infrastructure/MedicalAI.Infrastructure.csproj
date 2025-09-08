@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MedicalAI.Domain\MedicalAI.Domain.csproj" />
+      <None Remove="Prompts\prompt.json" />
   </ItemGroup>
 
 </Project>
